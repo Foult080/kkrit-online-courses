@@ -1,0 +1,26 @@
+{
+  "name": "kkrit-online-curses",
+  "version": "1.0.0",
+  "description": "new project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "server": "nodemon index"
+  },
+  "keywords": [
+    "mern",
+    "streaming",
+    "service",
+    "online",
+    "courses"
+  ],
+  "author": "foult080",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
