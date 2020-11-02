@@ -21,6 +21,10 @@ const usersSchema = new mongoose.Schema({
     type: String,
     default: "student"
   },
+  courses: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "courses",
+  }],
   date: {
     type: Date,
     default: Date.now,
