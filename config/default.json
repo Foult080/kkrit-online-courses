@@ -1,0 +1,4 @@
+{
+    "MongoURI": "mongodb://app_user:strongPass@localhost:27017/courses?authSource=courses",
+    "JWT": "big secret"
+}

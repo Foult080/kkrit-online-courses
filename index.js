@@ -1,50 +1,29 @@
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
 const app = express();
+const path = require("path");
+const cors = require("cors");
+const connectDB = require('./config/db');
 
-app.use(express.static(path.join(__dirname, "public")));
+connectDB();
 
-app.get("/video/:id", function (req, res) {
-  let id = req.params.id;
-  const path = `assets/video${id}.mp4`;
-  const stat = fs.statSync(path);
-  const fileSize = stat.size;
-  const range = req.headers.range;
+//use cors
+app.use(cors());
+//use json encode
+app.use(express.json({ extended: false }));
 
-  if (range) {
-    const parts = range.replace(/bytes=/, "").split("-");
-    const start = parseInt(parts[0], 10);
-    const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+//routes
+app.use("/api/video", require("./routes/video"));
 
-    if (start >= fileSize) {
-      res
-        .status(416)
-        .send("Requested range not satisfiable\n" + start + " >= " + fileSize);
-      return;
-    }
+app.use("/api/users", require("./routes/users"));
+app.use('/api/auth/', require('./routes/auth'));
 
-    const chunksize = end - start + 1;
-    const file = fs.createReadStream(path, { start, end });
-    const head = {
-      "Content-Range": `bytes ${start}-${end}/${fileSize}`,
-      "Accept-Ranges": "bytes",
-      "Content-Length": chunksize,
-      "Content-Type": "video/mp4",
-    };
-
-    res.writeHead(206, head);
-    file.pipe(res);
-  } else {
-    const head = {
-      "Content-Length": fileSize,
-      "Content-Type": "video/mp4",
-    };
-    res.writeHead(200, head);
-    fs.createReadStream(path).pipe(res);
-  }
+//resolve static folder for react app
+app.use(express.static("front-app/build"));
+//send index to client
+app.get("*", (req,res) => {
+  res.sendFile(path.resolve(__dirname, 'front-app', 'build', 'index.html'));
 });
 
 app.listen(5000, function () {
-  console.log("Listening on port 3000!");
+  console.log("Listening on port 5000!");
 });

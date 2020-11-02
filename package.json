@@ -18,9 +18,20 @@
   "author": "foult080",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcrypt": "^5.0.0",
+    "config": "^3.3.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-validator": "^6.6.1",
+    "gravatar": "^1.8.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.11"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
