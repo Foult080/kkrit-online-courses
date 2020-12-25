@@ -30,7 +30,7 @@ router.post(
       if (!user) {
         res.status(401).json({ errors: [{ msg: "Неверные данные" }] });
       }
-
+      console.log(user);
       //check pass
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {

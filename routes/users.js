@@ -47,7 +47,7 @@ router.post(
       //save user to db
       await user.save();
       //gen token
-      const payload = { user: { id: user.id } };
+      const payload = { user: { id: user.id, role: user.role } };
       jwt.sign(
         payload,
         config.get("JWT"),

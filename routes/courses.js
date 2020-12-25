@@ -24,6 +24,9 @@ router.post(
       //get data from req
       const { name, desc } = req.body;
       const picture = req.files.picture;
+      let date = new Date();
+      let salt = date.getFullYear() + "-" + (date.getMonth()+1)  + "-" + date.getDate();
+      picture.name = salt+ "-" + picture.name;
       picture.mv("./uploads/" + picture.name);
       //save data
       course = new Courses({
@@ -34,13 +37,27 @@ router.post(
       });
       await course.save();
       //send response
-      res.json(course);
+      return res.json(course);
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ errors: [{ msg: "Ошибка сервера" }] });
     }
   }
 );
+
+router.delete("/:course_id", auth, async (req,res) => {
+  if (req.user.role !== "admin") {
+    return res.status(401).json({ errors: [{ msg: "Недостаточно прав!" }] });
+  }
+  try {
+    const course = await Courses.findById(req.params.course_id);
+    await course.remove();
+    return res.status(200).json({ msg: "Курс удалён!" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Ошибка сервера");
+  }
+})
 
 module.exports = router;
 /*

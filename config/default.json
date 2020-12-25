@@ -1,4 +1,4 @@
 {
-    "MongoURI": "mongodb://app_user:strongPass@localhost:27017/courses?authSource=courses",
+    "MongoURI": "mongodb+srv://kkritApp:kkritAppUser@wsr-kkrit-app.gknzd.mongodb.net/online-course?retryWrites=true&w=majority",
     "JWT": "big secret"
 }
