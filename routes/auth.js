@@ -13,7 +13,7 @@ router.post(
   "/",
   [
     check("email", "Укажите корректный адрес электронной почты").isEmail(),
-    check("password", "Укажите верный пароль").not().isEmpty().exists(),
+    check("password", "Укажите верный пароль").not().isEmpty(),
   ],
   async (req, res) => {
     //check errors
@@ -30,7 +30,6 @@ router.post(
       if (!user) {
         res.status(401).json({ errors: [{ msg: "Неверные данные" }] });
       }
-      console.log(user);
       //check pass
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {

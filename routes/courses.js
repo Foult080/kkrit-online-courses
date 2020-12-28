@@ -27,7 +27,7 @@ router.post(
       let date = new Date();
       let salt = date.getFullYear() + "-" + (date.getMonth()+1)  + "-" + date.getDate();
       picture.name = salt+ "-" + picture.name;
-      picture.mv("./uploads/" + picture.name);
+      picture.mv("./front_app/public/images/" + picture.name);
       //save data
       course = new Courses({
         name,
