@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import logo from "../images/coaching.svg";
+import logo from "../../images/coaching.svg";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {

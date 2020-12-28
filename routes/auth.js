@@ -7,6 +7,11 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+router.post("/test", async (req,res) => {
+  console.log(req.body);
+  res.send(req.body);
+})
+
 // @route POST api/auth
 // @desc authenticate user and get token
 router.post(
@@ -16,12 +21,12 @@ router.post(
     check("password", "Укажите верный пароль").not().isEmpty(),
   ],
   async (req, res) => {
+    console.log(req.body);
     //check errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
     //get data from req
     const { email, password } = req.body;
     try {
@@ -64,7 +69,7 @@ router.post(
 // @desc get user
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
+    const user = await Users.findById(req.user.id).select("-password");
     res.json(user);
   } catch (err) {
     console.error(err.message);

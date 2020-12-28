@@ -1,18 +1,27 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { login } from "../../actions/auth";
 
-const Login = () => {
+const Login = ({ login, isAuth }) => {
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      login(values);
     },
   });
+
+  //redirect if logged in
+  if (isAuth) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <div className="container">
       <div className="text-center">
@@ -20,7 +29,7 @@ const Login = () => {
         <hr />
       </div>
       <form style={styles.form} onSubmit={formik.handleSubmit}>
-      <label htmlFor="email">Введите Email</label>
+        <label htmlFor="email">Введите Email</label>
         <input
           id="email"
           name="email"
@@ -71,4 +80,13 @@ const styles = {
   },
 };
 
-export default Login;
+Login.propTypes = {
+  isAuth: PropTypes.bool,
+  login: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mapStateToProps, { login })(Login);
