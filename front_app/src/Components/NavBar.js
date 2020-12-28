@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import logo from "../images/coaching.svg";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -29,10 +30,16 @@ const NavBar = () => {
             <Nav.Link href="#home">О площадке</Nav.Link>
             <Nav.Link href="#pricing">Поддержать проект</Nav.Link>
           </Nav>
-          <Button className="mr-1" variant="success">
-            Зарегистрироваться
-          </Button>
-          <Button variant="primary">Войти</Button>
+          <Link to="/signup">
+            <Button className="mr-1" variant="success">
+              <i className="fas fa-user-plus mr-1"></i>Зарегистрироваться
+            </Button>
+          </Link>
+          <Link to="/login">
+            <Button variant="primary">
+              <i className="fas fa-sign-in-alt mr-1"></i>Войти
+            </Button>
+          </Link>
         </Navbar.Collapse>
       </Navbar>
     </Fragment>

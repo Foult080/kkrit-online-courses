@@ -7,6 +7,8 @@ import Footer from "./Components/Footer";
 import NavBar from "./Components/NavBar";
 import Main from "./Components/Main";
 import Ex404 from "./Components/Ex404";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
         <section className="wrapper">
           <Switch>
             <Route exact path="/" component={Main} />
+            <Route exact path="/signup" component={Register} />
+            <Route exact path="/login" component={Login} />
             <Route component={Ex404} />
           </Switch>
         </section>

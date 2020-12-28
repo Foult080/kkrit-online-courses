@@ -9,7 +9,7 @@ const Main = () => {
           <h1 className="main-page-title">KKRIT-ONLINE-COURSES</h1>
           <h1 className="main-page-sub">Made by @foult080</h1>
           <div className="my-4">
-            <Link to="/signin">
+            <Link to="/signup">
             <Button size="lg" className="mr-1" variant="success">
               <i className="fas fa-user-plus mr-1"></i>
               Зарегистрироваться
