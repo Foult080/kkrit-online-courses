@@ -11,7 +11,7 @@ const NavBar = ({ auth: { loading, isAuth }, logOut }) => {
     <Fragment>
       <Link to="/dashboard">
         <Button className="mr-1" variant="success">
-          <i class="far fa-address-book mr-1"></i>Личный кабинет
+          <i className="far fa-address-book mr-1"></i>Личный кабинет
         </Button>
       </Link>
       <Button variant="danger" onClick={logOut}>

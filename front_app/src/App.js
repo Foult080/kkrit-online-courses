@@ -13,6 +13,7 @@ import PrivateRoute from "./components/PrivateRoute";
 //components
 import Footer from "./components/Layout/Footer";
 import NavBar from "./components/Layout/NavBar";
+import Alerts from "./components/Layout/Alert";
 import Main from "./components/Layout/Main";
 import Ex404 from "./components/Layout/Ex404";
 import Register from "./components/Auth/Register";
@@ -32,6 +33,7 @@ const App = () => {
       <Fragment>
         <Router>
           <NavBar />
+          <Alerts />
           <section className="wrapper">
             <Switch>
               <Route exact path="/" component={Main} />
