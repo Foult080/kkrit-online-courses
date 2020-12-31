@@ -36,6 +36,7 @@ const Login = ({ login, isAuth }) => {
           type="email"
           className="form-control"
           required
+          autoFocus
           placeholder="Email"
           onChange={formik.handleChange}
           value={formik.values.email}

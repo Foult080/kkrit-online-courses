@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
+  LOGOUT,
 } from "./types";
 
 import setAuthToken from "../utils/setAuthToken";
@@ -68,4 +69,9 @@ export const login = (values) => async (dispatch) => {
       type: LOGIN_FAIL,
     });
   }
+};
+
+//logout user
+export const logOut = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
 };
