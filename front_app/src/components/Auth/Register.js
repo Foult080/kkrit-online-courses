@@ -1,9 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { useFormik } from "formik";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { register } from "../../actions/auth";
 
-const Register = () => {
+const Register = ({ isAuth, register }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -12,9 +15,19 @@ const Register = () => {
       password2: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      if (values.password !== values.password2) {
+        alert("Пароли не совпадают");
+      } else {
+        register(values);
+      }
     },
   });
+
+  //redirect if logged in
+  if (isAuth) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <div className="container">
       <div className="text-center">
@@ -97,4 +110,13 @@ const styles = {
   },
 };
 
-export default Register;
+Register.propTypes = {
+  isAuth: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
+
+export default connect(mapStateToProps, { register })(Register);
